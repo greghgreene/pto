@@ -103,7 +103,7 @@ PTOResultType PTOAccrue::UpdateAccrued(void)
    nBiweeks = (int)((float)nDays / 14);
    fAccruedPTOHours = nBiweeks * fAccrueBiweekly;
    fHours = fHours + fAccruedPTOHours;
-   printf("%d %d %f %f\n", nDays, nBiweeks, fAccruedPTOHours, fHours);
+   //printf("%d %d %f %f\n", nDays, nBiweeks, fAccruedPTOHours, fHours);
    return ePTOSuccess;
 }
 
