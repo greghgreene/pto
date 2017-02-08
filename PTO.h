@@ -5,54 +5,53 @@
 
 typedef enum
 {
-    ePTOSuccess,
-    ePTOFailure
+   ePTOSuccess,
+   ePTOFailure
 } PTOResultType;
 
 typedef enum
 {
-    ePTONormal,
-    ePTOPatent,
-    ePTOService
+   ePTONormal,
+   ePTOPatent,
+   ePTOService
 } PTOType;
 
 // Generic PTO class.  This is for PTOs that don't accrue bi-weekly
 // such as patent and service days.
 class PTO
 {
-protected:
+ protected:
     float  fHours;
     Date   DateUpdated;
 
-public:
-    PTO (void);
-    PTO (float fHours);
-    PTO (float fHours, int nYear, int nMonth, int nDay);
+ public:
+    PTO(void);
+    PTO(float fHours);
+    PTO(float fHours, int nYear, int nMonth, int nDay);
 
-    void           Print (void);
-    float          Get (void);
-    PTOResultType  Add (float fNewHours);
-    PTOResultType  Set (float fCurrHours);
-    PTOResultType  Set (float fCurrHours, char* sDateString);
-    PTOResultType  Use (float fNewHours);
-    char*          GetDate (void);
+    void           Print(void);
+    float          Get(void);
+    PTOResultType  Add(float fNewHours);
+    PTOResultType  Set(float fCurrHours);
+    PTOResultType  Set(float fCurrHours, char *sDateString);
+    PTOResultType  Use(float fNewHours);
+    char*          GetDate(void);
 };
 
 // PTOs that accrue (bi-weekly)
-class PTOAccrue:  public PTO
+class PTOAccrue :  public PTO
 {
-private:
+ private:
     float fAccrueBiweekly = 7.7;  // Accrue for employees with 20+ years
 
+ public:
+    PTOAccrue(void);
+    PTOAccrue(float fHours);
+    PTOAccrue(float fHours, int nYear, int nMonth, int nDay);
 
-public:
-    PTOAccrue (void);
-    PTOAccrue (float fHours);
-    PTOAccrue (float fHours, int nYear, int nMonth, int nDay);
-
-    PTOResultType  Add (float fNewHours);
-    PTOResultType  Use (float fNewHours);
-    PTOResultType  UpdateAccrued (void); // Updates the accrued PTO hours
+    PTOResultType  Add(float fNewHours);
+    PTOResultType  Use(float fNewHours);
+    PTOResultType  UpdateAccrued(void); // Updates the accrued PTO hours
 };
 
 #endif // PTO_H_INCLUDED

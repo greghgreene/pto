@@ -9,50 +9,51 @@
 
 typedef enum
 {
-    ePTODBSuccess,
-    ePTODBFailure
+   ePTODBSuccess,
+   ePTODBFailure
 } PTODBResultType;
 
 // A PTO record consists of each type of PTO
 class PTORecord
 {
-protected:
+ protected:
     PTOAccrue  PTONormal = 0.0;
     PTO        PTOPatent = 0.0;
     PTO        PTOService = 0.0;
     Date       TransactionDate;
-public:
-    PTODBResultType Set (float fHoursNormal, float fHoursPatent, float fHoursService);
-    PTODBResultType Read (FILE *fp);
-    PTODBResultType Save (FILE *fp);
+ public:
+    PTODBResultType Set(float fHoursNormal, float fHoursPatent, float fHoursService);
+    PTODBResultType Read(FILE *fp);
+    PTODBResultType Save(FILE *fp);
 
-    PTODBResultType AddPTOHours (float fHours, PTOType type);
-    PTODBResultType UsePTOHours (float fHours, PTOType type);
-    void            Print (void);
+    PTODBResultType AddPTOHours(float fHours, PTOType type);
+    PTODBResultType UsePTOHours(float fHours, PTOType type);
+    PTODBResultType UpdateAccruedHours(void);
+    void            Print(void);
 };
 
 class PTODatabase
 {
-protected:
+ protected:
     int        nNumEntries = 0;
-    char       sDbFileName [MAX_DB_FILENAME] = {0};
+    char       sDbFileName[MAX_DB_FILENAME] = { 0 };
     bool       bModified = false;
     PTORecord  database[MAX_PTO_RECORDS];
     PTORecord  current;
 
-public:
-    PTODBResultType Create (void);
-    PTODBResultType CreateRecord (void);
-    PTODBResultType Read (void);
-    PTODBResultType Save (void);
+ public:
+    PTODBResultType Create(void);
+    PTODBResultType CreateRecord(void);
+    PTODBResultType Read(void);
+    PTODBResultType Save(void);
 
-    PTODBResultType AddPTOHours (void);
-    PTODBResultType UsePTOHours (void);
+    PTODBResultType AddPTOHours(void);
+    PTODBResultType UsePTOHours(void);
 
-    bool            Modified (void);
+    bool            Modified(void);
     void            PrintHistory(void);
     void            PrintCurrent(void);
-    void            PrintError (PTODBResultType);
+    void            PrintError(PTODBResultType);
 };
 
 #endif // PTODATABASE_H_INCLUDED
