@@ -42,7 +42,7 @@ class PTO
 class PTOAccrue :  public PTO
 {
  private:
-    float fAccrueBiweekly = 7.7;  // Accrue for employees with 20+ years
+    float fAccrueBiweekly = 6.15;  // Accrue for employees with 20+ years
 
  public:
     PTOAccrue(void);
